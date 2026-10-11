@@ -1,5 +1,16 @@
 # Spremembe
 
+## 0.2.0
+
+- **Povabilo pred namestitvijo**: povezava povabila v brskalniku najprej ponudi prenos aplikacije (z imenom doma
+  in koraki). Koda se zapomni – ob prvi prijavi v aplikaciji se uporabnik samodejno pridruži domu. Na iPhonu se
+  aplikacija, nameščena s strani povabila, odpre kar na povabilu; koda je za vsak primer prikazana tudi za ročni vnos.
+- **Prijava s povabilom**: prikaže, kateremu domu se boš pridružil, in privzeto odpre »Nov račun«.
+- **Povej prijatelju**: na strani Dom deli povezavo do aplikacije (brez povabila v svoj dom).
+- **Uvodni vodič**: kratek interaktiven sprehod (prostori, opravila, trak dejanj, plan, točke) – le enkrat, takoj po
+  ustvaritvi doma ali pridružitvi. Lahko ga preskočiš, ponovno pa ga zaženeš v Profilu (»Uvodni vodič«).
+- Popravek: po pridružitvi ali ustvaritvi doma aplikacija ne skoči več nazaj na izbiro doma.
+
 ## 0.1.0
 
 Prva različica HomeHero – aplikacija spremlja stanje doma namesto koledarja opravil.
