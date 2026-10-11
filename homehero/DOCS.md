@@ -1,0 +1,76 @@
+# HomeHero
+
+Družinska aplikacija za opravila, točke in nagrade. Add-on poganja strežnik in spletno aplikacijo (PWA)
+na portu **8271** (v add-onu teče na 3000; port na RPi-ju lahko spremeniš v zavihku *Omrežje*). Podatki (baza, slike, skrivnost za seje) so v `/data` in so vključeni v varnostne
+kopije Home Assistanta.
+
+## Nastavitve
+
+| Nastavitev | Pomen |
+|---|---|
+| `base_url` | Javni naslov aplikacije, npr. `https://homehero.gbartol.com`. Mora se ujemati z naslovom v brskalniku. |
+| `smtp_url` | SMTP za potrditev e-pošte in pozabljeno geslo (glej spodaj). Prazno = e-pošta se samo izpiše v log. |
+| `mail_from` | Pošiljatelj e-pošte; domena mora biti potrjena pri ponudniku (npr. `HomeHero <no-reply@gbartol.com>`). |
+| `require_email_verification` | Zahtevaj potrditev e-pošte pred prijavo (privzeto: da, če je nastavljen SMTP). |
+| `google_client_id`, `google_client_secret` | Prijava z Google in samodejna prijava (One Tap). Prazno = gumb Google se ne prikaže. |
+
+## E-pošta (Resend)
+
+1. Ustvari brezplačen račun na [resend.com](https://resend.com) (3000 sporočil/mesec).
+2. **Domains → Add domain** → `gbartol.com` (regija EU). Resend ponudi samodejno dodajanje DNS zapisov
+   v Cloudflare (*Sign in to Cloudflare*) — ali jih prepiši ročno v Cloudflare → DNS. Počakaj, da je domena *Verified*.
+   Obstoječih MX zapisov za tvojo pošto se ne dotika (zapisi so na poddomeni `send.`).
+3. **API Keys → Create API key** (dovoljenje *Sending access*, samo domena `gbartol.com`).
+4. V nastavitvah add-ona:
+   - `smtp_url`: `smtps://resend:<API ključ>@smtp.resend.com:465`
+   - `mail_from`: `HomeHero <no-reply@gbartol.com>`
+5. Ponovno zaženi add-on. Od zdaj nove registracije potrebujejo potrditev e-pošte.
+
+## Prijava z Google
+
+1. [Google Cloud Console](https://console.cloud.google.com) → nov projekt *HomeHero*.
+2. **APIs & Services → OAuth consent screen** (Google Auth Platform): tip *External*, ime aplikacije HomeHero,
+   podporni e-naslov, logotip (neobvezno). Pod **Audience** klikni *Publish app* (sicer se lahko prijavijo samo testni uporabniki).
+   Obseg (scopes) `openid`, `email`, `profile` ne zahteva Googlovega preverjanja.
+3. **Clients → Create client** → *Web application*:
+   - Authorized JavaScript origins: `https://homehero.gbartol.com`
+   - Authorized redirect URIs: `https://homehero.gbartol.com/api/auth/callback/google`
+4. Client ID in Client secret vpiši v `google_client_id` in `google_client_secret`, ponovno zaženi add-on.
+
+Če ima nekdo že račun z isto e-pošto, se prijava z Google samodejno poveže z njim.
+
+## Javni dostop (Cloudflare Tunnel)
+
+V **Cloudflare Zero Trust → Networks → Tunnels → (tunel) → Public Hostname** dodaj:
+
+| Polje | Vrednost |
+|---|---|
+| Subdomain / Domain | `homehero` / `gbartol.com` |
+| Service | `HTTP` → `<IP Raspberry Pi>:8271` |
+
+Cloudflare ustvari DNS zapis in zagotovi HTTPS. `base_url` v nastavitvah add-ona mora biti
+točno ta naslov (`https://homehero.gbartol.com`).
+
+Če tunel upravljaš iz add-ona Cloudflared (lokalna konfiguracija), namesto tega dodaj:
+
+```yaml
+additional_hosts:
+  - hostname: homehero.gbartol.com
+    service: http://<IP Raspberry Pi>:8271
+```
+
+## Pregled strežnika (v Home Assistant)
+
+V stranskem meniju HA je plošča **HomeHero** (samo za skrbnike HA; vklopiš jo z *Pokaži v stranski vrstici*
+na strani add-ona ali jo odpreš z gumbom *Odpri spletni vmesnik*). Prikaže:
+
+- vse domove na strežniku: člane, število opravil, koliko je bilo opravljenega v zadnjih 7 in 30 dneh,
+  nagrade, slike in zadnjo aktivnost (aktiven / miruje / neaktiven),
+- vse uporabnike: registracijo, zadnjo prijavo, v koliko domovih so,
+- velikost baze in slik.
+
+**Izbriši dom** odstrani dom in vse v njem (opravila, zgodovino, točke, nagrade, obvestila, slike); računi članov ostanejo.
+Uporabnike, ki niso v nobenem domu, lahko izbrišeš na zavihku *Uporabniki*. Obe brisanji zahtevata vpis imena za potrditev.
+
+Pregled teče na notranjih vratih 8099, ki niso preslikana navzven, in sprejema samo zahteve iz Home Assistanta –
+prek Cloudflare tunela ni dosegljiv.
