@@ -1,5 +1,23 @@
 # Spremembe
 
+## 0.3.0
+
+- **Nov »Moj urnik«**: namesto mreže 15-minutnih kvadratkov so termini kartice. Zgoraj lok dneva (6–23) s tvojimi
+  termini, termini drugih članov in soncem ob trenutni uri; na sredini tvoj skupni čas. Vsak termin ima ± za začetek
+  in trajanje (po 15 min) in seznam opravil, ki ti jih plan dodeli. Nov termin dodaš z enim tapom: Zjutraj, Opoldne,
+  Po službi, Zvečer. Brez vlečenja – stran se vedno normalno drsi.
+- **Razporejanje upošteva vrstni red prostorov**: najprej odloča nujnost (nujno pod 20 % · potrebno pod 50 % ·
+  kmalu), znotraj iste stopnje pa vrstni red prostorov, ki ga nastaviš pri prostorih.
+- **Daljši uvodni vodič**: po prostorih in opravilih te popelje še skozi Plan (potrebno in rezervirano, rezervacije
+  po članih, napoved), Moj urnik (zakaj rezervirati termine), obvestila (spodbuda za vklop) in trgovino nagrad.
+  Med koraki z gumbom »Naprej« ni mogoče po nesreči klikniti ničesar drugega.
+- **Povej prijatelju** je zdaj v Profilu med nastavitvami (pred Uvodnim vodičem).
+- Vodič se vedno konča na Mojem urniku (tudi ob »Preskoči« ali »Končaj vodič«).
+- Po uvodni nastavitvi doma ni več vmesnega zaslona »Tvoj dom je pripravljen« – odpre se domači zaslon z vodičem.
+- **Shrani in nazaj** v Mojem urniku: shrani in se vrne na plan doma.
+- Stolpci »Potrebno in rezervirano« imajo stalno višino in enako širino: stolpec je potrebni čas, polnilo delež
+  rezerviranega (več kot potrebno = poln stolpec).
+
 ## 0.2.0
 
 - **Povabilo pred namestitvijo**: povezava povabila v brskalniku najprej ponudi prenos aplikacije (z imenom doma
