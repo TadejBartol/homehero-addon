@@ -1,5 +1,15 @@
 # Spremembe
 
+## 0.3.1
+
+- **Razveljavi v Zgodovini**: pri izvedbi je gumb za razveljavitev (svojo v 24 urah, skrbnik opravil vedno) s
+  potrditvijo. Čistoča se vrne na stanje pred izvedbo, točke se odštejejo.
+- Popravek: dnevi z vnosom za nazaj pred ustvaritvijo opravila (npr. »včeraj« za danes dodano opravilo) so v
+  koledarju Zgodovine zdaj obarvani in klikljivi.
+- Popravek: uvodni vodič se pokaže tudi, če se je oseba pridružila v brskalniku in nato prvič odprla nameščeno
+  aplikacijo (stanje vodiča je zdaj shranjeno na strežniku, ne le v napravi).
+- Vodič, korak »Potrebno in rezervirano«: popravljeno navodilo (gumb je »Naprej«).
+
 ## 0.3.0
 
 - **Nov »Moj urnik«**: namesto mreže 15-minutnih kvadratkov so termini kartice. Zgoraj lok dneva (6–23) s tvojimi
