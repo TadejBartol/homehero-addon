@@ -1,5 +1,13 @@
 # Spremembe
 
+## 0.4.0
+
+- **Označevanje za druge** (novo pravilo doma, privzeto izklopljeno): pri potrditvi in vnosu za nazaj je gumb
+  »Opravil je drug član«. Izbrani član dobi točke in obvestilo, v zgodovini piše, kdo je označil. Razveljavi lahko
+  tisti, ki je označil, ali izbrani član (24 ur), skrbnik opravil vedno. Otroci ne označujejo za druge; za otroka velja
+  takoj, če označi kdo s pravico potrjevanja, sicer čaka na potrditev.
+- Novo obvestilo »Označeno zate«.
+
 ## 0.3.1
 
 - **Razveljavi v Zgodovini**: pri izvedbi je gumb za razveljavitev (svojo v 24 urah, skrbnik opravil vedno) s
